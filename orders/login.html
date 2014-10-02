@@ -18,39 +18,11 @@
 		<link href="./css/signin.css" rel="stylesheet">
 		
 		<script type="text/javascript" src="./js/jquery.cookie.js"></script>
+		<script type="text/javascript" src="./js/login.js"></script>
 	</head>
 	
 	<body>
-		<script language=javascript>
-			function auth() {
-				var data = $("#loginform").serializeArray();
-				$.ajax({
-					type: "POST",
-					url: "./backend/auth.php",
-					data: data,
-					success: function(data) {
-						var good = $.cookie('session') && $.cookie('id');
-						if (good) {
-							alert($.cookie('session'));
-						}
-						else {
-							$(".alert").remove();
-							$('<div/>', {
-							class: 'alert alert-warning',
-							text: "Login failed"
-						}).insertAfter("#prompt");
-						}
-					},
-					error:  function(xhr, str){
-						$(".alert").remove();
-						$('<div/>', {
-							class: 'alert alert-danger',
-							text: "There are problems with server"
-						}).insertAfter("#prompt");
-					}
-				});
-			}
-		</script>
+
 		<div class="container">
 			<form id="loginform" class="form-signin" role="form"  method="post" action="javascript:void(0);" onsubmit="auth()">
 				<h2 class="form-signin-heading" id="prompt">Please sign in</h2>
