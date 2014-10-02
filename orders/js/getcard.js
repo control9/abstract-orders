@@ -1,15 +1,13 @@
 function show(json) {
-	jQuery('<div/>', {
-		id: 'card-'+ json.id,
-		class: 'alert alert-success',
-		text: json.content
-	}).appendTo('#cards');
+	json.forEach( function(cardJson) {
+		createCard(cardJson).appendTo('#cards');
+	});
 }
 
-function run(cardId) {
+function getCards(count) {
 	$.getJSON(
-	"./backend/index.php", // The server URL 
-	{ id: cardId }, // Data you want to pass to the server.
+	"./backend/getcards.php", // The server URL 
+	{ count: count }, // Data you want to pass to the server.
 	show // The function to call on completion.
 	);
 }
