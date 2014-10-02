@@ -8,7 +8,7 @@ $password = $_POST['password'];
 $remember = $_POST['remember'];
 
 if ($remember) {
-	$expire = 7 * 24 * 3600 + time();
+	$expire = 365 * 24 * 3600 + time();
 }
 else $expire = 0;
 
@@ -18,10 +18,10 @@ if ($userdata) {
 	setcookie('id', $userdata['id'], $expire, "/");
 	setcookie('worker', $userdata['worker'], $expire, "/");
 }
-else {
-	setcookie('session', "", time() - 3600 * 24 * 365, "/");
-	setcookie('id', "", time() - 3600 * 24 * 365, "/");
-	setcookie('worker', "", time() - 3600 * 24 * 365, "/");
+else { //Removing cookies
+	setcookie('session', "", 1, "/");
+	setcookie('id', "", 1, "/");
+	setcookie('worker', "", 1, "/");
 	die("login failed");
 }
 ?>
