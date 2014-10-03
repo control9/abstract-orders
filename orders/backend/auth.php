@@ -1,5 +1,6 @@
-﻿<?php
-require_once 'doauth.php';	
+<?php
+require_once 'services/auth_service.php';	
+require_once 'services/session_manager.php';
 header('Cache-Control: no-cache, must-revalidate');
 header('Expires: Mon, 01 Jan 1976 00:00:00 GMT');
 
@@ -19,9 +20,7 @@ if ($userdata) {
 	setcookie('worker', $userdata['worker'], $expire, "/");
 }
 else { //Removing cookies
-	setcookie('session', "", 1, "/");
-	setcookie('id', "", 1, "/");
-	setcookie('worker', "", 1, "/");
+	clearSessionCookies();
 	die("login failed");
 }
 ?>

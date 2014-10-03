@@ -1,1 +1,44 @@
-﻿
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		
+		<title>Система приема/выполнения заказов</title>
+		
+		 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+		
+		
+		<link href="./css/loading.css" rel="stylesheet">
+		
+		<script type="text/javascript" src="./js/jquery.cookie.js"></script>
+		<script src="./js/getcard.js"></script>
+		<script src="./js/cardparser.js"></script>
+	</head>
+	
+	<body>
+		<div class="loader"></div>
+		<script src="./js/getuserdata.js"></script>
+		<header id="top">
+		<div class="container-fluid">
+			<div class="row" style="margin-top: 24px;">
+				<div class="col-md-2 col-sm-4">
+					<div class="well nav">
+						<h3 id="username"></h3>
+						<h3 id="money"></h3>
+						<a role="button" class="btn btn-default" href="#top" >logout</a>
+					</div>
+				</div>
+				<div class="col-md-10 col-sm-8" id="cards"></div>
+			</div>
+		</div>
+	</body>
+</html>

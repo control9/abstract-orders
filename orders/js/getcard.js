@@ -8,6 +8,6 @@ function getCards(count) {
 	$.getJSON(
 	"./backend/getcards.php", // The server URL 
 	{ count: count }, // Data you want to pass to the server.
-	show // The function to call on completion.
+	show
 	);
 }

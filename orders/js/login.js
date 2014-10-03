@@ -4,7 +4,7 @@ function auth() {
 		type: "POST",
 		url: "./backend/auth.php",
 		data: data,
-		success: function(data) {
+		success: function(response) {
 			var good = $.cookie('session') && $.cookie('id');
 			if (good) {
 				redirect();
@@ -17,7 +17,7 @@ function auth() {
 			}).insertAfter("#prompt");
 			}
 		},
-		error:  function(xhr, str){
+		error:  function(){
 			$(".alert").remove();
 			$('<div/>', {
 				class: 'alert alert-danger',
