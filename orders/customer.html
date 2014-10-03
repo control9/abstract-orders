@@ -25,19 +25,47 @@
 	</head>
 	
 	<body>
-		<div class="loader"></div>
-		<script src="./js/getuserdata.js"></script>
+		<!-- <div class="loader"></div>
+		<script src="./js/getuserdata.js"></script> -->
 		<header id="top">
 		<div class="container-fluid">
 			<div class="row" style="margin-top: 24px;">
 				<div class="col-md-2 col-sm-4">
-					<div class="well nav">
+					<div class="panel panel-primary">
 						<h3 id="username"></h3>
 						<h3 id="money"></h3>
 						<a role="button" class="btn btn-default" href="#top" >logout</a>
 					</div>
 				</div>
-				<div class="col-md-10 col-sm-8" id="cards"></div>
+				<div class="col-md-10 col-sm-8" id="cards">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h3 class="panel-title">Создание нового заказа</h3>
+						</div>
+						<div class="panel-body">
+							<form class="form-horizontal" role="form">
+								<div class="form-group">
+									<div class="col-sm-12">
+										<input type="text" class="form-control" id="new-card-summary" placeholder="Краткое описание" maxlength=64>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-12">
+										<textarea type="text" class="form-control" id="new-card-description" placeholder="Подробное описание заказа" maxlength=32000 rows="6"></textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-6" style="margin-top: 10px;">
+										<button type="submit" class="btn btn-primary btn-block">Создать заказ</button>
+									</div>
+									<div class="col-sm-6" style="margin-top: 10px;">
+										<button type="submit" class="btn btn-info btn-block">Очистить поля</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>
