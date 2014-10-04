@@ -21,10 +21,22 @@ switch ($action) :
 	case ("getorders"):
 		$count = $_POST['count'];
 		$from = $_POST['from'];
-		if ($count && $from) {
-			echo getOrders($count, $from);
+		if ($count) {
+			if ($from) {
+				echo getOrders($count, $from);
+			} else {
+				echo getLastOrders($count);
+			}
 		}
-		else wrongParams();
+		else {
+			$newest = $_POST['newest'];
+			if (newest) {
+				echo getNewOrders($newest);
+			}
+			else {
+			wrongParams();
+			}
+		}
 		break;
 
 	case ("createorder"):

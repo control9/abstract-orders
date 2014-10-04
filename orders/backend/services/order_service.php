@@ -5,13 +5,39 @@ require_once 'services/user_service.php';
 require_once 'services/money_service.php';
 
 function getOrders($count, $from) {
-	$data = array();
-	for ($i = $from; $i > $from - $count; $i = $i - 1) {
-		$id = $i;
-		$summary = $id . '-summary';
-		$description = $id . '-description';
-		$data[] = array( 'id' => $id, 'summary' => $summary, 'description' => $description);
+	$link = mysqli_connect(ORDERS_DB_ADRESS, ORDERS_DB_LOGIN, ORDERS_DB_PASSWORD, ORDERS_DB_NAME)
+	 or die('cannot connect: ' . mysqli_error($link));
+	$stmt = mysqli_prepare($link, 'SELECT id, summary, description, cost from ORDERS where id < ? and paid = 1 and isNull(executor) order by id desc limit ?');
+	mysqli_stmt_bind_param($stmt, 'ii', $from, $count);
+	return doGetOrders($link, $stmt);
+}
+
+function getLastOrders($count){
+	$link = mysqli_connect(ORDERS_DB_ADRESS, ORDERS_DB_LOGIN, ORDERS_DB_PASSWORD, ORDERS_DB_NAME)
+	 or die('cannot connect: ' . mysqli_error($link));
+	$stmt = mysqli_prepare($link, 'SELECT id, summary, description, cost from ORDERS where paid = 1 and isNull(executor) order by id desc limit ?');
+	mysqli_stmt_bind_param($stmt, 'i', $count);
+	return doGetOrders($link, $stmt);
+}
+
+function getNewOrders($newest) {
+	$link = mysqli_connect(ORDERS_DB_ADRESS, ORDERS_DB_LOGIN, ORDERS_DB_PASSWORD, ORDERS_DB_NAME)
+	 or die('cannot connect: ' . mysqli_error($link));
+	$stmt = mysqli_prepare($link, 'SELECT id, summary, description, cost from ORDERS where id > ? and paid = 1 and isNull(executor) order by id desc');
+	mysqli_stmt_bind_param($stmt, 'i', $newest);
+	return doGetOrders($link, $stmt);
+}	
+function doGetOrders($link, $stmt) {
+	if (!mysqli_stmt_execute($stmt)) {
+		return "fail";
 	}
+	mysqli_stmt_bind_result($stmt, $id, $summary, $description, $cost);
+	$data = array();
+	while (mysqli_stmt_fetch($stmt)) {
+		$data[] = array( 'id' => $id, 'summary' => $summary, 'description' => $description, 'cost' => $cost);
+	}
+	mysqli_stmt_close($stmt);
+	mysqli_close($link);
 	return json_encode($data);
 }
 
@@ -33,7 +59,7 @@ function createOrder($id, $summary, $description, $cost) {
 		case 'transfer failed':
 			return 'fail';
 		case 'transfer incomplete':
-			return 'critical failure';
+			return 'critical fail';
 	endswitch;
 }
 

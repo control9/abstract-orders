@@ -1,15 +1,29 @@
+var minOrderId = Infinity;
+var maxOrderId = -Infinity;
 function show(json) {
-	json.forEach( function(cardJson) {
+	$('#loadmore').hide();
+	if (typeof json !== 'undefined' && json.length > 0) {
+		json.forEach( function(cardJson) {
 		createCard(cardJson).appendTo('#cards');
+		minOrderId = Math.min(minOrderId, cardJson.id);
+		maxOrderId = Math.max(maxOrderId, cardJson.id);
 	});
+	loadingNow = false;
+	}
+	else {
+		$('.alert-info').remove();
+		$('#cards').append(
+			$('<div>').addClass("alert alert-info").text('Вы просмотрели все заказы.')
+		);
+	}
 }
 
 function getCards(count) {
+	loadingNow = true;
 	$.post(
 		"./backend/orders.php",
 		{ 	action: "getorders",
-			count: count, 
-			from: 999999,
+			count: count,
 			id: $.cookie('id'),
 			session: $.cookie('session')
 		},
@@ -19,6 +33,7 @@ function getCards(count) {
 }
 
 function getCards(count, from) {
+	loadingNow = true;
 	$.post(
 		"./backend/orders.php",
 		{ 	action: "getorders",
@@ -31,3 +46,12 @@ function getCards(count, from) {
 		"JSON"
 	);
 }
+getCards(7);
+$(window).scroll(function()
+{
+    if($(window).scrollTop() == $(document).height() - $(window).height() && !loadingNow)
+    {
+        $('#loadmore').show();
+		getCards(7, minOrderId);
+    }
+});
