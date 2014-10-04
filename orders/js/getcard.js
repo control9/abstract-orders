@@ -6,8 +6,13 @@ function show(json) {
 
 function getCards(count) {
 	$.post(
-		"./backend/getcards.php",
-		{ count: count },
+		"./backend/orders.php",
+		{ 	action: "getorders",
+			count: count, 
+			from: 999999,
+			id: $.cookie('id'),
+			session: $.cookie('session')
+		},
 		show,
 		"JSON"
 	);
@@ -15,8 +20,13 @@ function getCards(count) {
 
 function getCards(count, from) {
 	$.post(
-		"./backend/getcards.php",
-		{ count: count, from: from },
+		"./backend/orders.php",
+		{ 	action: "getorders",
+			count: count, 
+			from: from,
+			id: $.cookie('id'),
+			session: $.cookie('session')
+		},
 		show,
 		"JSON"
 	);

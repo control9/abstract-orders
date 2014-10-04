@@ -6,10 +6,11 @@ require_once 'services/money_service.php';
 
 function getOrders($count, $from) {
 	$data = array();
-	for ($i = 0; $i < $count; $i = $i + 1) {
+	for ($i = $from; $i > $from - $count; $i = $i - 1) {
 		$id = $i;
-		$content = $id . '-content';
-		$data[] = array( 'id' => $id, 'content' => $content);
+		$summary = $id . '-summary';
+		$description = $id . '-description';
+		$data[] = array( 'id' => $id, 'summary' => $summary, 'description' => $description);
 	}
 	return json_encode($data);
 }
