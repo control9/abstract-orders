@@ -20,46 +20,51 @@
 		<link href="./css/loading.css" rel="stylesheet">
 		
 		<script type="text/javascript" src="./js/jquery.cookie.js"></script>
-		<script src="./js/getcard.js"></script>
-		<script src="./js/cardparser.js"></script>
+		<script src="./js/createorder.js"></script>
+		<script src="./js/logout.js"></script>
 	</head>
 	
 	<body>
-		<!-- <div class="loader"></div>
-		<script src="./js/getuserdata.js"></script> -->
+		<div class="loader"></div>
+		<script src="./js/getuserdata.js"></script>
 		<header id="top">
 		<div class="container-fluid">
 			<div class="row" style="margin-top: 24px;">
-				<div class="col-md-2 col-sm-4">
+				<div class="col-md-3 col-sm-4">
 					<div class="panel panel-primary">
-						<h3 id="username"></h3>
-						<h3 id="money"></h3>
-						<a role="button" class="btn btn-default" href="#top" >logout</a>
+						<div class="panel-body">
+							<div class="col-sm-12" id="sidebar-content">
+								<h3 id="username"></h3>
+								<h3 id="money"></h3>
+							</div>
+							<button role="button" class="btn btn-block btn-primary" onclick="logout()">Выйти из системы</a>
+							<button role="button" class="btn btn-block btn-primary" onclick="logoutAll()">Прервать все сессии</a>							
+						</div>
 					</div>
 				</div>
-				<div class="col-md-10 col-sm-8" id="cards">
+				<div class="col-md-9 col-sm-8">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
 							<h3 class="panel-title">Создание нового заказа</h3>
 						</div>
 						<div class="panel-body">
-							<form class="form-horizontal" role="form">
+							<form class="form-horizontal" role="form" id="new-card-form">
 								<div class="form-group">
-									<div class="col-sm-12">
-										<input type="text" class="form-control" id="new-card-summary" placeholder="Краткое описание" maxlength=64>
+									<div class="col-sm-7">
+										<input type="text" class="form-control" id="new-card-summary" name="summary" placeholder="Краткое описание" maxlength=64 required>
+									</div>
+									<div class="col-sm-4">
+										<input type="number" class="form-control" id="new-card-cost" name="cost" placeholder="Стоимость" maxlength=64 required>
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-sm-12">
-										<textarea type="text" class="form-control" id="new-card-description" placeholder="Подробное описание заказа" maxlength=32000 rows="6"></textarea>
+										<textarea type="text" class="form-control" id="new-card-description" name="description" placeholder="Подробное описание заказа" maxlength=32000 rows="6" required></textarea>
 									</div>
 								</div>
 								<div class="form-group">
-									<div class="col-sm-6" style="margin-top: 10px;">
-										<button type="submit" class="btn btn-primary btn-block">Создать заказ</button>
-									</div>
-									<div class="col-sm-6" style="margin-top: 10px;">
-										<button type="submit" class="btn btn-info btn-block">Очистить поля</button>
+									<div class="col-sm-12" style="margin-top: 10px;">
+										<button type="submit" class="btn btn-primary btn-block" onsubmit="createOrder();">Создать заказ</button>
 									</div>
 								</div>
 							</form>

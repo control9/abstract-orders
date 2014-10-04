@@ -1,5 +1,5 @@
 function auth() {
-	var data = $("#loginform").serializeArray();
+	var data = $("#loginform").serialize();
 	$.ajax({
 		type: "POST",
 		url: "./backend/auth.php",
@@ -37,3 +37,5 @@ function redirect() {
 		}
 	}
 }
+
+redirect();

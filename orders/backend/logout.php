@@ -5,9 +5,12 @@ header('Cache-Control: no-cache, must-revalidate');
 header('Expires: Mon, 01 Jan 1976 00:00:00 GMT');
 
 $id = $_POST['id'];
-if ($id) {
-	$session = $_POST['session'];
-	if ($session) {
+$session = $_POST['session'];
+$all = $_POST['all'];
+
+$valid = checkSession($id, $session);
+if ($valid) {
+	if ($all) {
 		logout($id, $session);
 	}
 	else {

@@ -20,7 +20,7 @@
 		
 		<script type="text/javascript" src="./js/jquery.cookie.js"></script>
 		<script src="./js/getcard.js"></script>
-		<script src="./js/cardparser.js"></script>
+		<script src="./js/cardrender.js"></script>
 		<script src="./js/logout.js"></script>
 	</head>
 	
@@ -32,14 +32,19 @@
 		<div class="container-fluid">
 			<div class="row" style="margin-top: 24px;">
 				<div class="col-md-3 col-sm-4">
-					<div class="well nav">
-						<h3 id="username"></h3>
-						<h3 id="money"></h3>
-						<button role="button" class="btn btn-default" onclick="logout()">Выйти из системы</a>
-						<button role="button" class="btn btn-default" onclick="logoutAll()">Прервать все сессии</a>
+					<div class="panel panel-primary">
+						<div class="panel-body">
+							<div class="col-sm-12" id="sidebar-content">
+								<h3 id="username"></h3>
+								<h3 id="money"></h3>
+							</div>
+							<button role="button" class="btn btn-block btn-primary" onclick="logout()">Выйти из системы</a>
+							<button role="button" class="btn btn-block btn-primary" onclick="logoutAll()">Прервать все сессии</a>							
+						</div>
 					</div>
 				</div>
-				<div class="col-md-9 col-sm-8" id="cards"></div>
+				<div class="col-md-9 col-sm-8" id="cards">
+				</div>
 			</div>
 		</div>
   </body>

@@ -1,5 +1,5 @@
 <?php
-require_once 'services/auth_service.php';	
+require_once 'services/user_service.php';	
 require_once 'services/session_manager.php';
 header('Cache-Control: no-cache, must-revalidate');
 header('Expires: Mon, 01 Jan 1976 00:00:00 GMT');

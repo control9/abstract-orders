@@ -5,9 +5,19 @@ function show(json) {
 }
 
 function getCards(count) {
-	$.getJSON(
-	"./backend/getcards.php", // The server URL 
-	{ count: count }, // Data you want to pass to the server.
-	show
+	$.post(
+		"./backend/getcards.php",
+		{ count: count },
+		show,
+		"JSON"
+	);
+}
+
+function getCards(count, from) {
+	$.post(
+		"./backend/getcards.php",
+		{ count: count, from: from },
+		show,
+		"JSON"
 	);
 }

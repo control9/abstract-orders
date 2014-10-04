@@ -5,6 +5,9 @@ function doLogout(params) {
 		url: "./backend/logout.php",
 		data: params,
 		success: function(response) {
+			//Remove cookies to evade cyclic redirect in case of backend failure
+			$.removeCookie("id");
+			$.removeCookie("session");
 			window.location.replace('./login.html');
 		}
 	});
