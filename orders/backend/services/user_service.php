@@ -59,7 +59,7 @@ function getUserData($id) {
 			'id' => $id, 
 			'login' => $login,
 			'real_name' =>$real_name,
-			'money' =>$money,
+			'money' => ($money / 10000),
 			'worker' => $worker
 		);
 	}

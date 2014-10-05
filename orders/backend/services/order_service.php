@@ -35,7 +35,7 @@ function doGetOrders($link, $stmt) {
 	mysqli_stmt_bind_result($stmt, $id, $summary, $description, $cost);
 	$data = array();
 	while (mysqli_stmt_fetch($stmt)) {
-		$data[] = array( 'id' => $id, 'summary' => $summary, 'description' => $description, 'cost' => $cost - ceil($cost * COMMISSION) );
+		$data[] = array( 'id' => $id, 'summary' => $summary, 'description' => $description, 'cost' => ( $cost - ceil($cost * COMMISSION ) ) / 10000) ;
 	}
 	mysqli_stmt_close($stmt);
 	mysqli_close($link);
@@ -43,8 +43,8 @@ function doGetOrders($link, $stmt) {
 }
 
 function createOrder($id, $summary, $description, $cost) {
-	if (getUserData($id)['money'] < $cost) return "Недостаточно средств";
-	if ( ceil($cost * COMMISSION)>= $cost) return "Комиссия по заказу (". (COMMISSION * 100) ."%, округлённые вверх до целого числа) должна быть меньше стоимости";
+	$cost = round($cost * 10000);
+	if (round(getUserData($id)['money'] * 10000) < $cost) return "Недостаточно средств";
 	$order_id = prepareOrder($id, $summary, $description, $cost);
 	if ($order_id == 0) {
 		return "Ошибка при инициализации заказа";
