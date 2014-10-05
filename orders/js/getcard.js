@@ -1,14 +1,15 @@
 var minOrderId = Infinity;
 var maxOrderId = -Infinity;
 function show(json) {
+	redirectIfLoggedOut();
 	$('#loadmore').hide();
 	if (typeof json !== 'undefined' && json.length > 0) {
 		json.forEach( function(cardJson) {
-		createCard(cardJson).appendTo('#cards');
-		minOrderId = Math.min(minOrderId, cardJson.id);
-		maxOrderId = Math.max(maxOrderId, cardJson.id);
-	});
-	loadingNow = false;
+			createCard(cardJson).appendTo('#cards');
+			minOrderId = Math.min(minOrderId, cardJson.id);
+			maxOrderId = Math.max(maxOrderId, cardJson.id);
+		});
+		loadingNow = false;
 	}
 	else {
 		$('.alert-info').remove();
@@ -46,12 +47,15 @@ function getCards(count, from) {
 		"JSON"
 	);
 }
-getCards(7);
-$(window).scroll(function()
+getCards(15);
+
+function loadmore()
 {
-    if($(window).scrollTop() == $(document).height() - $(window).height() && !loadingNow)
+    if($(window).scrollTop() >= $(document).height() - $(window).height() && !loadingNow)
     {
         $('#loadmore').show();
-		getCards(7, minOrderId);
+		getCards(15, minOrderId);
     }
-});
+}
+
+$(window).scroll(loadmore);

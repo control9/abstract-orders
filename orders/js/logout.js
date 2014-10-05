@@ -15,7 +15,10 @@ function doLogout(params) {
 	
 function logoutAll() {
 	doLogout({
-				id: $.cookie("id")
+				id: $.cookie("id"),
+				session: $.cookie("session"),
+				all: 1
+				
 			});
 }
 
@@ -24,4 +27,12 @@ function logout() {
 				id: $.cookie("id"),
 				session: $.cookie("session")
 			});
+}
+
+function redirectIfLoggedOut() {
+	if (! $.cookie("id") || ! $.cookie("session")) {
+		window.location.replace('./login.html');
+		return true; //location.replace takes some time, we want to evade additional alerts before redirection
+	}
+	return false;
 }

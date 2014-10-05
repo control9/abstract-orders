@@ -20,23 +20,22 @@
 		<link href="./css/loading.css" rel="stylesheet">
 		
 		<script type="text/javascript" src="./js/jquery.cookie.js"></script>
-		<script src="./js/createorder.js"></script>
 		<script src="./js/logout.js"></script>
+		<script src="./js/createorder.js"></script>
 	</head>
 	
 	<body>
 		<div class="loader"></div>
 		<script src="./js/getuserdata.js"></script>
-		<header id="top">
 		<div class="container-fluid">
 			<div class="row" style="margin-top: 24px;">
 				<div class="col-md-3 col-sm-4">
-					<div class="panel panel-primary">
+					<div class="panel panel-info">
+						<div class="panel-heading">
+							<span class="panel-title"> <h3 id="username"></h3></span>
+							<span class="panel-title"> <h4 id="money"></h4></span>
+						</div>
 						<div class="panel-body">
-							<div class="col-sm-12" id="sidebar-content">
-								<h3 id="username"></h3>
-								<h3 id="money"></h3>
-							</div>
 							<button role="button" class="btn btn-block btn-primary" onclick="logout()">Выйти из системы</a>
 							<button role="button" class="btn btn-block btn-primary" onclick="logoutAll()">Прервать все сессии</a>							
 						</div>
@@ -48,18 +47,20 @@
 							<h3 class="panel-title">Создание нового заказа</h3>
 						</div>
 						<div class="panel-body">
-							<form class="form-horizontal" role="form" id="new-card-form">
-								<div class="form-group">
-									<div class="col-sm-7">
+							<form class="form-horizontal" role="form" id="new-card-form">								
+								<div class="col-sm-7">
+									<div class="form-group" id="new-card-summary-group">
 										<input type="text" class="form-control" id="new-card-summary" name="summary" placeholder="Краткое описание" maxlength=64 required>
 									</div>
-									<div class="col-sm-4">
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group" id="new-card-cost-group">
 										<input type="number" class="form-control" id="new-card-cost" name="cost" placeholder="Стоимость" maxlength=64 required>
 									</div>
 								</div>
-								<div class="form-group">
-									<div class="col-sm-12">
-										<textarea type="text" class="form-control" id="new-card-description" name="description" placeholder="Подробное описание заказа" maxlength=32000 rows="6" required></textarea>
+								<div class="col-sm-12">
+									<div class="form-group" id="new-card-description-group">
+										<textarea type="text" class="form-control"  id="new-card-description" name="description" placeholder="Подробное описание заказа" maxlength=32000 rows="6" required></textarea>
 									</div>
 								</div>
 								<div class="form-group">

@@ -34,7 +34,7 @@ function createCard(card) {
 			)
 		).append(
 			$('<div>').addClass('col-sm-3 col-sm-offset-2').append(
-				$('<button>').css("margin-top", "16px").addClass('btn btn-block btn-primary').attr('role','button').attr('id','execute-'+card.id).text('Выполнить')
+				$('<button>').css("margin-top", "16px").addClass('btn btn-block btn-primary').attr('role','button').attr('id','execute-'+card.id).attr('onclick','completeOrder('+card.id+')').text('Выполнить')
 			)
 		).append(
 			$('<div>').addClass('col-sm-12').text(card.description)

@@ -10,7 +10,7 @@ $all = $_POST['all'];
 
 $valid = checkSession($id, $session);
 if ($valid) {
-	if ($all) {
+	if (!$all) {
 		logout($id, $session);
 	}
 	else {

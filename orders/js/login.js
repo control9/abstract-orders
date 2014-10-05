@@ -13,7 +13,7 @@ function auth() {
 				$(".alert").remove();
 				$('<div/>', {
 				class: 'alert alert-warning',
-				text: "Login failed"
+				text: "Неверное имя пользователя или пароль"
 			}).insertAfter("#prompt");
 			}
 		},
@@ -21,7 +21,7 @@ function auth() {
 			$(".alert").remove();
 			$('<div/>', {
 				class: 'alert alert-danger',
-				text: "There are problems with server"
+				text: "Не удалось войти в систему"
 			}).insertAfter("#prompt");
 		}
 	});

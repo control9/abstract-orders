@@ -13,7 +13,7 @@ $session = $_POST['session'];
 $valid = checkSession($id, $session);
 if (!$valid) {
 	clearSessionCookies();
-	die("Not authorized");
+	die("Недостаточно прав");
 }
 $action = $_POST['action'];
 
@@ -53,7 +53,7 @@ switch ($action) :
 	case ("complete"):
 		checkRights($id, 1);
 		$orderid = $_POST['orderid'];
-		if ($cardid){
+		if ($orderid){
 			echo completeOrder($id, $orderid);
 		}
 		else wrongParams();

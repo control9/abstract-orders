@@ -9,8 +9,8 @@ function loadDataFromServer(callback) {
 			"JSON"
 		).fail(
 			function( jqxhr, textStatus, error ) {
-				var err = textStatus + ", " + error;
-				console.log( "Request Failed: " + err );
+				$.removeCookie("id");
+				$.removeCookie("session");
 				window.location.replace('./login.html');
 			}
 	);	

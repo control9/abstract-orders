@@ -9,7 +9,7 @@ function auth($login, $password){
 	}
 	$link = mysqli_connect(USERS_DB_ADRESS, USERS_DB_LOGIN, USERS_DB_PASSWORD, USERS_DB_NAME)
 	 or die('cannot connect: ' . mysqli_error($link));
-	$stmt = mysqli_prepare($link, 'SELECT id, pass, worker from USERS where login = ? and system = 0');
+	$stmt = mysqli_prepare($link, 'SELECT id, pass, salt, worker from USERS where login = ? and system = 0');
 	mysqli_stmt_bind_param($stmt, "s", $login);
 	$result =  mysqli_stmt_execute($stmt) or die('request failed: ' . mysqli_error($link));
 	if (!$result) {
@@ -17,10 +17,10 @@ function auth($login, $password){
 		mysqli_close($link);
 		return null;
 	}
-	mysqli_stmt_bind_result($stmt, $id, $dbpass, $worker);
+	mysqli_stmt_bind_result($stmt, $id, $dbpass, $salt, $worker);
 	$found = mysqli_stmt_fetch($stmt);
 	mysqli_stmt_close($stmt);
-	if ($found && $dbpass == $password) {
+	if ($found && $dbpass == hash("sha256", ($salt .$password)) ) {
 		$session = createSession($id);
 		return array("session" => $session, "id" => $id, "worker" => $worker);
 	}
@@ -33,7 +33,7 @@ function checkRights($id, $worker) {
 	if ($userdata['worker'] != $worker) {
 		clearSessionCookies();
 		http_response_code(403);
-		die('Not authorized');
+		die('Недостаточно прав для запрошенной операции');
 	}
 }
 
