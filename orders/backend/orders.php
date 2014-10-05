@@ -61,11 +61,10 @@ switch ($action) :
 		
 	default:	
 		http_response_code(500);
-		die("unknown action");
+		die("Неизвестный запрос");
 endswitch;
 
 function wrongParams() {
-	http_response_code(500);
-	die("wrong params");
+	die("Недопустимые значения параметров");
 }
 ?>

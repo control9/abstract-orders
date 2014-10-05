@@ -6,18 +6,26 @@ function createOrder() {
 	$.post(
 		"./backend/orders.php",
 		data,
-		notifySuccess,
+		notify,
 		"text"
 	).fail(notifyFail);
 }
 
-function notifyFail() {
+function notifyFail(errorMessage) {
 	$(".alert").remove();
 	$('<div/>', {
 		class: 'alert alert-danger',
-		text: "Ошибка при создании заказа"
+		text: "Ошибка при создании заказа: "+errorMessage
 	}).prependTo("#new-card-form").delay(5000).fadeOut("slow");
 	window.setTimeout(function() {$(".alert-danger").remove()}, 7000);
+}
+
+function notify(response) {
+	if ( $.isNumeric(response)) {
+		notifySuccess(response);
+	} else {
+		notifyFail(response);
+	}
 }
 
 function notifySuccess(id) {
@@ -27,4 +35,6 @@ function notifySuccess(id) {
 		text: "Заказ №" + id + " создан"
 	}).prependTo("#new-card-form").delay(5000).fadeOut("slow");
 	window.setTimeout(function() {$(".alert-success").remove()}, 7000);
+	loadDataFromServer(updateUserData);
+	
 }

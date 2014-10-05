@@ -11,7 +11,7 @@ function loadDataFromServer(callback) {
 			function( jqxhr, textStatus, error ) {
 				var err = textStatus + ", " + error;
 				console.log( "Request Failed: " + err );
-				//window.location.replace('./login.html');
+				window.location.replace('./login.html');
 			}
 	);	
 }

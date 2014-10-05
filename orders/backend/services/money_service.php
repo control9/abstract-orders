@@ -11,7 +11,7 @@ function transferMoney($from, $to, $amount, $context) {
 		return 'transfer init failed';
 	}
 	$transferResult = doTransfer($from, $to, $amount, $context);
-	if (!transferResult) {
+	if (!$transferResult) {
 		return 'transfer failed';
 	}
 	if (!completeTransfer($transferId)) {

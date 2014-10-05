@@ -42,9 +42,10 @@ function doGetOrders($link, $stmt) {
 }
 
 function createOrder($id, $summary, $description, $cost) {
+	if (getUserData($id)['money'] < $cost) return "Недостаточно средств";
 	$order_id = prepareOrder($id, $summary, $description, $cost);
 	if ($order_id == 0) {
-		return "fail-prepare";
+		return "Ошибка при инициализации заказа";
 	}
 	$reserved_id = getReservedId();
 	$transferResult = transferMoney($id, $reserved_id, $cost, $order_id);
@@ -53,13 +54,13 @@ function createOrder($id, $summary, $description, $cost) {
 			if (completeOrder($order_id)) {
 				return $order_id;
 			}
-			else return "fail-complete";
+			else return "Ошибка при подтверждении заказа";
 			break;
 		case 'transfer init failed':
 		case 'transfer failed':
-			return 'fail';
+			return 'Ошибка при переводе оплаты';
 		case 'transfer incomplete':
-			return 'critical fail';
+			return 'Ошибка при подтверждении оплаты';
 	endswitch;
 }
 
