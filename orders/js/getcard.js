@@ -1,5 +1,10 @@
-var minOrderId = Infinity;
-var maxOrderId = -Infinity;
+function initCards() {
+	minOrderId = Infinity;
+	maxOrderId = -Infinity;
+	getCards(15);
+	$(window).scroll(loadmore);
+}
+
 function show(json) {
 	redirectIfLoggedOut();
 	$('#loadmore').hide();
@@ -47,7 +52,7 @@ function getCards(count, from) {
 		"JSON"
 	);
 }
-getCards(15);
+
 
 function loadmore()
 {
@@ -58,4 +63,3 @@ function loadmore()
     }
 }
 
-$(window).scroll(loadmore);

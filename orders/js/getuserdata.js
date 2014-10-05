@@ -1,5 +1,3 @@
-loadDataFromServer(completeLoading);
-
 function loadDataFromServer(callback) {
 	$.post("./backend/getuserdata.php",
 			{ 	id: $.cookie('id'),
@@ -26,7 +24,7 @@ function updateUserData(userData) {
 		$('<div/>', {
 			class: 'alert alert-warning',
 			text: "Не удалось обновить данные"
-		}).prependTo("#prompt");
+		}).prependTo("#username");
 	}
 }
 	
@@ -41,4 +39,8 @@ function completeLoading(userData) {
 		$.removeCookie("session");
 		window.location.replace("./login.html");
 	}
+}
+
+function getData() {
+	loadDataFromServer(completeLoading);
 }
