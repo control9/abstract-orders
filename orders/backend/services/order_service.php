@@ -44,6 +44,7 @@ function doGetOrders($link, $stmt) {
 
 function createOrder($id, $summary, $description, $cost) {
 	if (getUserData($id)['money'] < $cost) return "Недостаточно средств";
+	if ( ceil($cost * COMMISSION)>= $cost) return "Комиссия по заказу (". (COMMISSION * 100) ."%, округляется вверх) должна быть меньше стоимости";
 	$order_id = prepareOrder($id, $summary, $description, $cost);
 	if ($order_id == 0) {
 		return "Ошибка при инициализации заказа";
