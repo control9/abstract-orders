@@ -1,5 +1,5 @@
 function completeOrder(id) {
-	$('#execute-'+id).attr('disabled', 'disabled');
+	$('#execute-'+id).prop('disabled', true);
 	$.post(
 		"./backend/orders.php",
 		{ 	action: "complete",

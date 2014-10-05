@@ -47,7 +47,7 @@
 							<h3 class="panel-title">Создание нового заказа</h3>
 						</div>
 						<div class="panel-body">
-							<form class="form-horizontal" role="form" id="new-card-form">								
+							<form class="form-horizontal" role="form" id="new-card-form" action="javascript:void(0);" onsubmit="createOrder()">								
 								<div class="col-sm-7">
 									<div class="form-group" id="new-card-summary-group">
 										<input type="text" class="form-control" id="new-card-summary" name="summary" placeholder="Краткое описание" maxlength=64 required>
@@ -65,7 +65,7 @@
 								</div>
 								<div class="form-group">
 									<div class="col-sm-12" style="margin-top: 10px;">
-										<button type="button" class="btn btn-primary btn-block" onclick="createOrder();">Создать заказ</button>
+										<button type="submit" id="send-order-button" class="btn btn-primary btn-block">Создать заказ</button>
 									</div>
 								</div>
 							</form>

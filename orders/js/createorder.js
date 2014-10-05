@@ -1,9 +1,9 @@
 function createOrder() {
-	if (!validateFields()) return;
 	var data = $("#new-card-form").serializeArray();
 	data.push( {name:"action", value:"createorder"});
 	data.push( {name:"id", value:$.cookie('id')});
 	data.push( {name:"session", value:$.cookie('session')});
+	$("#send-order-button").prop('disabled', true);
 	$.post(
 		"./backend/orders.php",
 		data,
@@ -12,26 +12,8 @@ function createOrder() {
 	).fail(notifyFail);
 }
 
-function validateFields() {
-	$('#new-card-summary-group').removeClass("has-error");
-	$('#new-card-cost-group').removeClass("has-error");
-	$('#new-card-description-group').removeClass("has-error");
-	if (! $('#new-card-summary').val()) {
-		$('#new-card-summary-group').addClass("has-error");
-		return false;
-	}
-	if (! $('#new-card-cost').val() || ! $.isNumeric($('#new-card-cost').val())) {
-		$('#new-card-cost-group').addClass("has-error");
-		return false;
-	}
-	if (! $('#new-card-description').val()) {
-		$('#new-card-description-group').addClass("has-error");
-		return false;
-	}
-	return true;
-}
-
 function notifyFail(errorMessage) {
+	$("#send-order-button").prop('disabled', false);
 	$(".alert").remove();
 	$('<div/>', {
 		class: 'alert alert-danger',
@@ -40,6 +22,7 @@ function notifyFail(errorMessage) {
 }
 
 function notify(response) {
+	$("#send-order-button").prop('disabled', false);
 	if (redirectIfLoggedOut()) return;
 	if ( $.isNumeric(response)) {
 		notifySuccess(response);
@@ -49,6 +32,7 @@ function notify(response) {
 }
 
 function notifySuccess(id) {
+	$("#send-order-button").prop('disabled', false);
 	$(".alert").remove();
 	$('<div/>', {
 		class: 'alert alert-success',
